@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>practice</title>
+  </head>
+  <body>
+    <h2>practice</h2>
+    <p>birthday:<input type="date" name="birthday" id="birthday" value="0000-00-00" autofocus></p>
+    <p><input type="button" value="calc!" onclick="getAge();"</p>
+    <p>today <span id="today"></span></p>
+    <p>born <span id="dayPast">???</span> after date</p>
+    <p>About <span id="age">???</span> years old</p>
+    <script>
+        function getAge(){
+          //複数回使うなら、変数にすると記述がラクになる
+          var mybirthday=document.getElementById('birthday');
+
+          //id birthdayの値を取得
+          var birthday=mybirthday.value;
+          //var d1=new Date(birthday);
+          var birthdayArray=birthday.split("-");
+          var year=birthdayArray[0];
+          var month=birthdayArray[1]-1;
+          var day=birthdayArray[2];
+          console.log(birthday);
+
+          var d1=new Date(year,month,day);
+          var d2=new Date();
+          var diff=d2.getTime()-d1.getTime();
+          var dayPast=Math.floor(diff/(1000*60*60*24));
+          //alert(dayPast+'_days');
+          var age =Math.floor(dayPast/365.25);
+          //alert('about_'+age+'_years_old');
+
+          //html側の各idに値を返す
+          document.getElementById('dayPast').innerHTML=dayPast;
+          document.getElementById('age').innerHTML=age;
+          document.getElementById('today').innerHTML=d2;
+        }
+    </script>
+
+  </body>
+</html>
